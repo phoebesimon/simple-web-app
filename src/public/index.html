@@ -22,27 +22,38 @@
     </style>
 </head>
 <body ng-app="htmlAnalyzer" ng-controller="MainController">
-  <form name="myForm">
-    <label>Enter a URL:
-      <input type="text" name="input" ng-model="url.value"
-             ng-pattern="url.pattern" required ng-trim="false">
-    </label>
-    <button ng-click="submit()">
-      Submit
-    </button>
-    <div role="alert">
+        <form class="navbar-form navbar-left" role="search">
+            Enter a URL:
+            <div class="form-group">
+                <input name="textField" type="text" class="form-control" placeholder="http://www.example.com" ng-model="url.value"
+                       ng-pattern="url.pattern" required ng-trim="false">
+            </div>
+            <button type="submit" class="btn btn-default" ng-click="submit()">Submit</button>
+            <div role="alert">
       <span class="error" ng-show="myForm.input.$error.required">
         Required!</span>
       <span class="error" ng-show="myForm.input.$error.pattern">
         Must be a valid URL</span>
-    </div>
-  </form>
-  <ul>
-    <li ng-repeat="(key, value) in urlResponse.summary">
-        <span ng-click="highlight(key)">{{key}} : {{value}}</span>
-    </li>
-  </ul>
-  <pre ng-bind-html="urlResponse.html | escapeHtml | highlight:searchTag">{{urlResponse.html}}</pre>
+            </div>
+        </form>
+        <div style="clear:both"></div>
+  <div class="container-fluid">
+      <div class="row">
+          <div class="col-sm-3">
+              <h2>Summary</h2>
+              <div class="list-group">
+                  <button type="button" class="list-group-item" ng-click="highlight(key)" ng-repeat="(key, value) in urlResponse.summary">
+                      <span>{{key}}</span>
+                      <span class="badge">{{value}}</span>
+                  </button>
+              </div>
+          </div>
+          <div class="col-sm-9">
+              <h2>HTML</h2>
+              <pre ng-show="urlResponse.html" ng-bind-html="urlResponse.html | escapeHtml | highlight:searchTag">{{urlResponse.html}}</pre>
+          </div>
+      </div>
+  </div>
 </body>
 </html>
 

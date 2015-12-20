@@ -4,8 +4,8 @@ angular.module('MainCtrl', []).controller('MainController', function($scope, $ht
     $scope.urlResponse = {html: ''};
 
     $scope.url = {
-      value: 'http://www.google.com',
-      pattern: '.*' ///^https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/
+      value: '',
+      pattern: /^https?:\/\/(-\.)?([^\s/?\.#-]+\.?)+(\/[^\s]*)?$/
     };   
 
    $scope.submit = function() {
@@ -23,10 +23,9 @@ angular.module('MainCtrl', []).controller('MainController', function($scope, $ht
            console.log('ERROR GET-ing URL', response)
            $scope.urlError = response;
        });
-   }
+   };
 
    $scope.highlight = function(key) {
-       console.log('WOULD HAVE HIGHLIGHTED', key)
        $scope.searchTag = key;
    };
 
@@ -48,7 +47,7 @@ angular.module('MainCtrl', []).controller('MainController', function($scope, $ht
     }
 }).filter('highlight', function($sce) {
         return function(text, phrase) {
-            if (phrase) text = text.replace(new RegExp('(&lt;(&#x2F;)?' + phrase + '.*?&gt;)', 'gi'),
+            if (phrase) text = text.replace(new RegExp('(&lt;(&#x2F;)?' + phrase + '.*?([\s\S\n\t]*?).*?&gt;)', 'gmi'),
                 '<span class="highlighted">$1</span>')
 
             return $sce.trustAsHtml(text)
