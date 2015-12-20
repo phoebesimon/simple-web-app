@@ -1,4 +1,5 @@
  var request = require('request');
+ var html = require("html");
  var htmlparser = require("htmlparser");
  var summary = require('./summary');
 
@@ -18,7 +19,7 @@ module.exports = function(app) {
         parser = new htmlparser.Parser(handler);
 
     request.get(url, function(err, response, body) {
-        info.html = body;
+        info.html = html.prettyPrint(body, {indent_size: 4});
         if (err) {
             res.status(400).json({error: err});
             return;
