@@ -7,6 +7,7 @@ To Run:
   $ bower install
   $ node server.js
 ```
+Navigate to `http://localhost:8080`
 
 To Run Tests:
 ```
