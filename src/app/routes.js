@@ -1,4 +1,3 @@
- // app/routes.js
  var request = require('request');
  var htmlparser = require("htmlparser");
 
@@ -23,12 +22,6 @@
  }
 
 module.exports = function(app) {
-
-        // server routes ===========================================================
-        // handle things like api calls
-        // authentication routes
-
-        // sample api route
   app.get('/url', function(req, res) {
     var url = req.query.url,
         info = {},
@@ -59,4 +52,4 @@ module.exports = function(app) {
   app.get('*', function(req, res) {
     res.sendfile('./public/index.html');
   });
-}
+};

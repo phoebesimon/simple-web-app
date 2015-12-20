@@ -1,4 +1,3 @@
-// Suite
 describe('The controller', function() {
     var $controller, $httpBackend, escapeHtmlFilter, highlightFilter;
 
