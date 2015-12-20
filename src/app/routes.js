@@ -33,8 +33,10 @@ module.exports = function(app) {
     var url = req.query.url,
         info = {},
         handler = new htmlparser.DefaultHandler(function (error, dom) {
-          if (error)
-              console.error('Error parsing html: ', error); //TODO what to do on error?
+          if (error) {
+              res.status(500).json({error: error});
+              return;
+          }
           else {
               var summary = {};
               createSummary(dom, summary);
@@ -47,7 +49,8 @@ module.exports = function(app) {
     request.get(url, function(err, response, body) {
         info.html = body;
         if (err) {
-            console.log('ERROR: ', err); //TODO What to do on err?
+            res.status(400).json({error: err});
+            return;
         }
         parser.parseComplete(body);
 

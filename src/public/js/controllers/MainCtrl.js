@@ -1,26 +1,25 @@
 // public/js/controllers/MainCtrl.js
 angular.module('MainCtrl', []).controller('MainController', function($scope, $http) {
-
     $scope.urlResponse = {html: ''};
-
     $scope.url = {
       value: '',
       pattern: /^https?:\/\/(-\.)?([^\s/?\.#-]+\.?)+(\/[^\s]*)?$/
     };   
 
    $scope.submit = function() {
+       $scope.urlError = null;
+       $scope.searchTag = null;
+       $scope.urlResponse = {html: ''};
        $http({
            method: 'GET',
            url: '/url?url=' + $scope.url.value
        }).then(function successCallback(response) {
            // this callback will be called asynchronously
            // when the response is available
-           console.log('Success! ', response)
            $scope.urlResponse = response.data;
        }, function errorCallback(response) {
            // called asynchronously if an error occurs
            // or server returns response with an error status.
-           console.log('ERROR GET-ing URL', response)
            $scope.urlError = response;
        });
    };
@@ -48,8 +47,8 @@ angular.module('MainCtrl', []).controller('MainController', function($scope, $ht
 }).filter('highlight', function($sce) {
         return function(text, phrase) {
             if (phrase) text = text.replace(new RegExp('(&lt;(&#x2F;)?' + phrase + '.*?([\s\S\n\t]*?).*?&gt;)', 'gmi'),
-                '<span class="highlighted">$1</span>')
+                '<span class="highlighted">$1</span>');
 
-            return $sce.trustAsHtml(text)
+            return $sce.trustAsHtml(text);
         }
     });
