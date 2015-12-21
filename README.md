@@ -1,8 +1,15 @@
 # simple-web-app
 
+Pre-reqs:
+```
+install git
+install node (https://nodejs.org/en/download/package-manager/)
+npm install -g bower
+```
+
 To Run:
 ```
-  $ cd src
+  $ cd /path/to/repo/simple-web-app/src
   $ npm install
   $ bower install
   $ node server.js

@@ -6,7 +6,6 @@
   },
   "dependencies": {
     "body-parser": "~1.4.2",
-    "bower": "~1.7.1",
     "express": "~4.5.1",
     "html": "0.0.10",
     "htmlparser": "~1.7.7",
