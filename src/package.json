@@ -2,7 +2,7 @@
   "name": "simple-web-app",
   "main": "server.js",
   "scripts": {
-    "test": "node ./tests/test-summary.js"
+    "test": "node ./tests/test-summary.js; node ./tests/test-server.js"
   },
   "dependencies": {
     "body-parser": "~1.4.2",

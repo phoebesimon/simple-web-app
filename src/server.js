@@ -3,7 +3,8 @@ var app            = express();
 var bodyParser     = require('body-parser');
 var methodOverride = require('method-override');
 
-var port = process.env.PORT || 8080; 
+var port = process.env.PORT || 8080;
+var server;
 
 // get all data/stuff of the body (POST) parameters
 // parse application/json 
@@ -26,11 +27,13 @@ require('./app/routes')(app); // configure our routes
 
 // start app ===============================================
 // startup our app at http://localhost:8080
-app.listen(port);               
+server = app.listen(port);
 
 // shoutout to the user                     
 console.log('Magic happens on port ' + port);
 
 // expose app           
 exports = module.exports = app;
+
+exports.server = server;
 
